@@ -4,6 +4,7 @@ var topics = ["soccer", "football", "tennis", "badminton", "gymnastics", "baseba
 
 var state;
 var searchTerm;
+var searchPressed = false;
 
 //display buttons on screen for desktop version
 generateButtons();
@@ -13,6 +14,7 @@ generateButtons();
 $("#add-search-term").click(function () {
     event.preventDefault();
 
+    searchPressed = true;
     //search word must have a value
     if ($("#search-term").val().trim().length > 0) {
         var newButton = $("<button>");
@@ -20,9 +22,9 @@ $("#add-search-term").click(function () {
         topics.push(searchTerm);
         if ($(window).width() > 768) {
             generateButtons();
-            getGifsOnSearch();
+            getGifs();
         } else {
-            getGifsOnSearch();
+            getGifs();
         }
     } else {
         alert("Please enter a search term");
@@ -31,32 +33,7 @@ $("#add-search-term").click(function () {
 })
 
 
-//when search is pressed an API call is made and GIFS are populated
-function getGifsOnSearch() {
-    $(".grid-container").empty();
-    var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
-    xhr.done(function (result) {
-        console.log(result);
 
-        for (var i = 0; i <= result.data.length - 1; i++) {
-            var container = $("<div>");
-            container.addClass("grid-item");
-            var img = $("<img>");
-            img.addClass("one-gif")
-            img.attr("data-state", "still")
-            img.attr("moving", result.data[i].images.fixed_height.url);
-            img.attr("still", result.data[i].images.fixed_height_still.url);
-            img.attr("src", result.data[i].images.fixed_height_still.url);
-            container.append(img);
-            var p = $("<div>");
-            p.addClass("rating");
-            p.text("rating is : " + result.data[i].rating.toUpperCase())
-            container.append(p);
-            $(".grid-container").append(container);
-        }
-    });
-
-}
 
 //generated desktop buttons
 function generateButtons() {
@@ -101,6 +78,7 @@ function generateButtonsMobile() {
 }
 
 
+
 //toggles mobile buttons on click of the mobile-btn-menu button
 $("#mobile-btn-menu").click(function () {
     console.log("mobile menu pressed");
@@ -109,11 +87,19 @@ $("#mobile-btn-menu").click(function () {
 
 
 //get Gifs on button press
-function getGifs(value) {
+function getGifs() {
     $(".grid-container").empty();
-    var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
+
+    //if search hasn't been used, make a call using the button's value
+    if (!searchPressed) {
+        var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
+        //if search has been used, make a call using the search term value
+    } else if (searchPressed) {
+        var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
+    }
+
     xhr.done(function (result) {
-        console.log(result);
+        //console.log(result);
 
         for (var i = 0; i <= result.data.length - 1; i++) {
             var container = $("<div>");
@@ -131,6 +117,8 @@ function getGifs(value) {
             container.append(p);
             $(".grid-container").append(container);
         }
+
+        searchPressed = false;
     });
 
 }
@@ -150,7 +138,15 @@ function switchGifs() {
 
 
 
-//function calls
+
+//function calls1
 $(document).on("click", ".btn", getGifs);
 $(document).on("click", ".btn-mobile", getGifs);
+$(document).on("click", ".btn-mobile", hideMobileBtn);
 $(document).on("click", ".one-gif", switchGifs);
+
+
+function hideMobileBtn() {
+    $(".btn-mobile").css('display', "none");
+    btnsMobileVisible = false;
+}

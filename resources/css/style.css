@@ -209,3 +209,8 @@ input:focus {
     position:sticky;
     /* margin-top:50px; */
 }
+
+.rating{
+    color:yellow;
+    margin-bottom:85px;
+}
