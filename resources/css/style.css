@@ -172,7 +172,7 @@ input:focus {
 @media only screen and (max-width:768px) {
     .mobile-btns {
         display: block;
-        /* position:fixed; */
+        position:fixed;
         height:100%;
         /* border: 1px red solid; */
     }
