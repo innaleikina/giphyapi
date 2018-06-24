@@ -3,6 +3,7 @@ var key = "jYTfzlUXqx607nu91cb320GgiFkNNk6T";
 var topics = ["soccer", "football", "tennis", "badminton", "gymnastics", "baseball", "track", "swimming", "cheerleading", "dancing", "curling"];
 
 var gifClicked = false;
+var searchTerm;
 
 generateButtons();
 
@@ -11,20 +12,26 @@ $("#add-search-term").click(function () {
     event.preventDefault();
     if ($("#search-term").val().trim().length > 0) {
         var newButton = $("<button>");
-        var searchTerm = $("#search-term").val().trim();
+         searchTerm = $("#search-term").val().trim();
         topics.push(searchTerm);
         if ($(window).width() > 768) {
             generateButtons();
-        } else{
+         
+        } else {
 
             generateButtonsMobile();
+       
         }
-        
+
     } else {
         alert("Please enter a search term");
     }
 
 })
+
+function getGifsOnSerach(){
+
+}
 
 
 function generateButtons() {
@@ -44,10 +51,10 @@ function generateButtons() {
 }
 
 function generateButtonsMobile() {
-    $("#btn-container").empty();
+    $(".display-mobile-btns").empty();
     if (btnsMobileVisible == false) {
         for (var i = 0; i < topics.length; i++) {
-            $(".mobile-btns").append('<button class="btn-style btn-mobile" value="' + topics[i] + '" >' + topics[i] + '</button>');
+            $(".display-mobile-btns").append('<button class="btn-style btn-mobile" value="' + topics[i] + '" >' + topics[i] + '</button>');
             $(".btn-mobile").css('display', "block");
             btnsMobileVisible = true;
             $(".btn-mobile").css("background-color", "rgb(39, 62, 71)");
@@ -60,9 +67,9 @@ function generateButtonsMobile() {
 }
 
 
-function getGifs() {
+function getGifs(value) {
     $(".grid-container").empty();
-    var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
+    var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" +  this.value + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
     xhr.done(function (result) {
         console.log(result);
 
@@ -102,6 +109,9 @@ $("#mobile-btn-menu").click(function () {
     console.log("mobile menu pressed");
     generateButtonsMobile();
 })
+
+
+
 
 $(document).on("click", ".btn", getGifs);
 $(document).on("click", ".btn-mobile", getGifs);
