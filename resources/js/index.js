@@ -2,7 +2,7 @@ var key = "jYTfzlUXqx607nu91cb320GgiFkNNk6T";
 
 var topics = ["soccer", "football", "tennis", "badminton", "gymnastics", "baseball", "track", "swimming", "cheerleading", "dancing", "curling"];
 
-var gifClicked = false;
+var state;
 var searchTerm;
 
 generateButtons();
@@ -12,24 +12,20 @@ $("#add-search-term").click(function () {
     event.preventDefault();
     if ($("#search-term").val().trim().length > 0) {
         var newButton = $("<button>");
-         searchTerm = $("#search-term").val().trim();
+        searchTerm = $("#search-term").val().trim();
         topics.push(searchTerm);
         if ($(window).width() > 768) {
             generateButtons();
-         
         } else {
-
             generateButtonsMobile();
-       
         }
-
     } else {
         alert("Please enter a search term");
     }
 
 })
 
-function getGifsOnSerach(){
+function getGifsOnSerach() {
 
 }
 
@@ -67,9 +63,10 @@ function generateButtonsMobile() {
 }
 
 
+
 function getGifs(value) {
     $(".grid-container").empty();
-    var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" +  this.value + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
+    var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
     xhr.done(function (result) {
         console.log(result);
 
@@ -78,6 +75,7 @@ function getGifs(value) {
             container.addClass("grid-item");
             var img = $("<img>");
             img.addClass("one-gif")
+            img.attr("data-state", "still")
             img.attr("moving", result.data[i].images.fixed_height.url);
             img.attr("still", result.data[i].images.fixed_height_still.url);
             img.attr("src", result.data[i].images.fixed_height_still.url);
@@ -93,13 +91,13 @@ function getGifs(value) {
 }
 
 function switchGifs() {
-    //console.log("switch will work " + $(this).attr("moving"));
-    if (!gifClicked) {
-        $(this).attr("src", $(this).attr("moving"))
-        gifClicked = true;
-    } else if (gifClicked) {
+    state = $(this).attr("data-state");
+    if (state == "still") {
+        $(this).attr("src", $(this).attr("moving"));
+        $(this).attr("data-state", "animate");
+    } else if (state == "animate") {
         $(this).attr("src", $(this).attr("still"));
-        gifClicked = false;
+        $(this).attr("data-state", "still");
     }
 }
 
