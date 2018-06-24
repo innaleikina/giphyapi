@@ -1,5 +1,5 @@
 html {
-    color: rgb(216,201,155);
+ 
     font-family: "PT Sans"
 }
 
@@ -8,6 +8,7 @@ body {
 }
 
 h1 {
+    color: rgb(216,201,155);
     text-align: center;
     letter-spacing: 6px;
 }
@@ -88,6 +89,10 @@ h1 {
         padding-top: 50px;
         border-top: .5px yellow dashed;
     }
+}
+
+label{
+    color: rgb(216,201,155);
 }
 
 input {
