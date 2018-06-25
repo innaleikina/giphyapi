@@ -13,6 +13,7 @@ generateButtons();
 // _________________________ FUNCTION PERFORED WHEN SEARCH IS PRESSED_____________________________
 //when search term is added a new button is appended, and buttons rerender on screen
 //gifs populate when search is pressed
+
 $("#add-search-term").click(function () {
     event.preventDefault();
 
@@ -33,8 +34,15 @@ $("#add-search-term").click(function () {
     } else {
         alert("Please enter a search term");
     }
+    $("#search-term").val('');
+});
 
-})
+//trigger search on enter and on button click
+$(document).keypress(function (e) {
+    if (e.which == 13) {
+        $("#add-search-term").click();
+    }
+});
 
 //__________________________________________GENERATE BUTTONS UNIVERSAL___________________________
 //generated desktop buttons
@@ -85,7 +93,7 @@ function generateButtonsMobile() {
 //__________________________________________MOBILE MENU BUTTON CLICK GENERATES BUTTONS__________________________
 //toggles mobile buttons on click of the mobile-btn-menu button
 $("#mobile-btn-menu").click(function () {
-   // console.log("mobile menu pressed");
+    // console.log("mobile menu pressed");
     generateButtonsMobile();
 })
 
@@ -159,5 +167,3 @@ $(document).on("click", ".btn", getGifs);
 $(document).on("click", ".btn-mobile", getGifs);
 $(document).on("click", ".btn-mobile", hideMobileBtns);
 $(document).on("click", ".one-gif", switchGifs);
-
-
