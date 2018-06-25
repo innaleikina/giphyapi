@@ -109,37 +109,37 @@ function hideMobileBtns() {
 
 //__________________________________________RETRIEVE GIFS MOBILE AND DESKTOP___________________________
 //get Gifs on button press
+var url;
+var limit = 10;
+
 function getGifs() {
     $(".grid-container").empty();
-
     //if search hasn't been used, make a call using the button's value
     if (!searchPressed) {
-        var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
+        url = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=" + limit + "&rating=g&rating=pg");
         //if search has been used, make a call using the search term value
     } else if (searchPressed) {
-        var xhr = $.get("https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=" + key + "&limit=10&rating=g&rating=pg");
+        url = $.get("https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=" + key + "&limit=" + limit +"&rating=g&rating=pg");
     }
-
-    xhr.done(function (result) {
-        //console.log(result);
-
+    url.done(function (result) {
         for (var i = 0; i <= result.data.length - 1; i++) {
-            var container = $("<div>");
-            container.addClass("grid-item");
+            var containerGif = $("<div>");
+            containerGif.addClass("grid-item");
             var img = $("<img>");
             img.addClass("one-gif")
             img.attr("data-state", "still")
             img.attr("moving", result.data[i].images.fixed_height.url);
             img.attr("still", result.data[i].images.fixed_height_still.url);
             img.attr("src", result.data[i].images.fixed_height_still.url);
-            container.append(img);
+            containerGif.append(img);
             var p = $("<div>");
             p.addClass("rating");
             p.text("rating is : " + result.data[i].rating.toUpperCase())
-            container.append(p);
-            $(".grid-container").append(container);
+            containerGif.append(p);
+            $(".grid-container").append(containerGif);
+         
         }
-
+        $(".grid-container").append('<button class="more btn-style"> give me more </button>' );
         searchPressed = false;
     });
 
@@ -159,6 +159,10 @@ function switchGifs() {
     }
 }
 
+//__________________________________________TOGGLE BETWEEN STILL AND MOVING GIFS___________________________
+$(".more").click(function(){
+
+});
 
 
 //__________________________________________CALL FUNCTIONS BUTTONS___________________________

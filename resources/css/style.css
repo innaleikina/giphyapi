@@ -243,3 +243,10 @@ input:focus {
     color: yellow;
     margin-bottom: 85px;
 }
+
+.more{
+    display:block;
+    margin:0 auto;
+    margin-left:40px;
+    width:200px;
+}
