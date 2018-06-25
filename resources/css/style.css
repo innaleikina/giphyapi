@@ -1,5 +1,4 @@
 html {
- 
     font-family: "PT Sans"
 }
 
@@ -8,9 +7,13 @@ body {
 }
 
 h1 {
-    color: rgb(216,201,155);
+    color: rgb(216, 201, 155);
     text-align: center;
     letter-spacing: 6px;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 /* _____________________________ BTNS AND SEARCH________________ */
@@ -29,11 +32,11 @@ h1 {
     /* margin:0 auto; */
 }
 
-
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:1200px) {
     .container-top {
         display: flex;
         flex-direction: column;
+        width: 80%;
     }
     #btn-container {
         width: 100%;
@@ -54,7 +57,7 @@ h1 {
     box-shadow: 1px 1px 3px rgba(216, 151, 60);
     color: rgb(216, 201, 155);
     letter-spacing: .3px;
-    width: 150px;
+    width: 190px;
 }
 
 @media only screen and (max-width:480px) {
@@ -84,15 +87,20 @@ h1 {
     margin-left: 20px;
 }
 
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:1200px) {
     .input-container {
         padding-top: 50px;
         border-top: .5px yellow dashed;
+        margin: 0 auto;
+        width:80%;
+        display:flex;
+        flex-direction:column;
     }
 }
 
-label{
-    color: rgb(216,201,155);
+label {
+    color: rgb(216, 201, 155);
+    margin-bottom:20px;
 }
 
 input {
@@ -101,9 +109,17 @@ input {
     background-color: rgb(234, 233, 235);
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width:1200px) {
     input {
         margin-left: 0;
+        width:50%;
+    }
+}
+
+@media only screen and (max-width:768px) {
+    input {
+        margin-left: 0;
+        width:80%;
     }
 }
 
@@ -167,15 +183,14 @@ input:focus {
 }
 
 @media only screen and (max-width:768px) {
-    .mobile-btns-all{
+    .mobile-btns-all {
         display: block;
-        position:absolute;
-        height:auto;
+        position: absolute;
+        height: auto;
         /* border: 1px red solid; */
     }
-
-    .btn{
-        display:none;
+    .btn {
+        display: none;
     }
 }
 
@@ -184,33 +199,47 @@ input:focus {
     margin: 0 auto;
 }
 
-#mobile-btn-menu{
-    width:60px;
-    position:sticky;
-}
-
-.fa-bars{
-    font-size:14px;
-}
-
-.btn-mobile{
-    height:40px;
-    font-size:12px;
-    width:100px;
-}
-
-.btn-mobile:hover{
-    color:rgb(216, 151, 60);
-    border:1px rgb(216, 151, 60) solid;
-}
-
-.display-mobile-btns{
+#mobile-btn-menu {
+    width: 60px;
+    position: fixed;
+    top: 50px;
+    background-color: rgb(39, 62, 71);
     /* border:1px red solid; */
-    position:sticky;
-    /* margin-top:50px; */
 }
 
-.rating{
-    color:yellow;
-    margin-bottom:85px;
+#mobile-btn-menu:hover {
+    color: rgb(216, 151, 60);
+    /* border:1px red solid; */
+}
+
+.fa-bars {
+    font-size: 14px;
+}
+
+.btn-mobile {
+    height: 40px;
+    font-size: 12px;
+    width: 100px;
+}
+
+.btn-mobile:hover {
+    color: rgb(216, 151, 60);
+    border: 1px rgb(216, 151, 60) solid;
+}
+
+.display-mobile-btns {
+    /* border:1px red solid; */
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    top: 100px;
+    /* border:1px red solid; */
+    background-color: rgba(39, 62, 71, .9);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+}
+
+.rating {
+    color: yellow;
+    margin-bottom: 85px;
 }
