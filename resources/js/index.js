@@ -1,4 +1,5 @@
 var key = "jYTfzlUXqx607nu91cb320GgiFkNNk6T";
+var newsKey = "0ae55fd9d34a4f94ac9db4a2dd4c1dc3";
 
 var topics = ["soccer", "football", "tennis", "badminton", "gymnastics", "baseball", "track", "swimming", "dancing", "curling"];
 
@@ -28,8 +29,10 @@ $("#add-search-term").click(function () {
         if ($(window).width() > 768) {
             generateButtons();
             getGifs();
+            getWikipedia();
         } else {
             getGifs();
+            getWikipedia();
         }
     } else {
         alert("Please enter a search term");
@@ -119,7 +122,7 @@ function getGifs() {
         url = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=" + limit + "&rating=g&rating=pg");
         //if search has been used, make a call using the search term value
     } else if (searchPressed) {
-        url = $.get("https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=" + key + "&limit=" + limit +"&rating=g&rating=pg");
+        url = $.get("https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=" + key + "&limit=" + limit + "&rating=g&rating=pg");
     }
     url.done(function (result) {
         for (var i = 0; i <= result.data.length - 1; i++) {
@@ -137,13 +140,41 @@ function getGifs() {
             p.text("rating is : " + result.data[i].rating.toUpperCase())
             containerGif.append(p);
             $(".grid-container").append(containerGif);
-         
+
         }
-        $(".grid-container").append('<button class="more btn-style"> give me more </button>' );
+
         searchPressed = false;
     });
 
 }
+
+
+//_______________________________________ GET NEWS _______________________
+
+function getWikipedia() {
+    $(".wikipedia").remove();
+
+    if (!searchPressed) {
+        url = "https://www.wikipedia.org//w/api.php?action=query&format=json&list=search&srsearch=" +
+            this.value +
+            "&srnamespace=0&srlimit=10&callback=?"
+        //if search has been used, make a call using the search term value
+    } else if (searchPressed) {
+        url = "https://www.wikipedia.org//w/api.php?action=query&format=json&list=search&srsearch=" +
+            searchTerm +
+            "&srnamespace=0&srlimit=10&callback=?"
+    }
+
+    $.getJSON(url, function (data) {
+        console.log(url);
+        console.log(data);
+        $(".input-container").append('<div class="wikipedia">' + data.query.search[0].snippet + '...' + '<a href=https://en.wikipedia.org/?curid=' + data.query.search[0].pageid + '" target="_blank"><button id="read-btn"  > read more </button>' + '</div></a>');
+        $(".input-container").append();
+    })
+}
+
+
+
 
 
 //__________________________________________TOGGLE BETWEEN STILL AND MOVING GIFS___________________________
@@ -160,7 +191,7 @@ function switchGifs() {
 }
 
 //__________________________________________TOGGLE BETWEEN STILL AND MOVING GIFS___________________________
-$(".more").click(function(){
+$(".more").click(function () {
 
 });
 
@@ -168,6 +199,9 @@ $(".more").click(function(){
 //__________________________________________CALL FUNCTIONS BUTTONS___________________________
 //function calls1
 $(document).on("click", ".btn", getGifs);
+$(document).on("click", ".btn", getWikipedia);
 $(document).on("click", ".btn-mobile", getGifs);
+$(document).on("click", ".btn-mobile", getWikipedia);
+
 $(document).on("click", ".btn-mobile", hideMobileBtns);
 $(document).on("click", ".one-gif", switchGifs);

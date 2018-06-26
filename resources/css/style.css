@@ -16,6 +16,19 @@ button:hover {
     cursor: pointer;
 }
 
+@keyframes showMobileButtons {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}
+
+button:focus{
+    outline:0;
+}
+
 /* _____________________________ BTNS AND SEARCH________________ */
 
 .container-top {
@@ -82,9 +95,48 @@ button:hover {
     outline: 0;
 }
 
+/* ____________________ INPUT____________________ */
+
+.wikipedia {
+    width: 100%;
+    padding: 20px;
+    /* color: rgb(216, 201, 155); */
+    border: 1px rgb(216, 151, 60) solid;
+    line-height: 1.4rem;
+    background-color:rgba(216, 201, 155, .4);
+    color:rgb(39, 62, 71);
+    margin-top:25px;
+    font-weight:bold;
+    box-shadow:2px 2px 4px rgba(216, 201, 155, .2);
+}
+
+#read-btn {
+    width: 100px;
+    font-size: 15px;
+    color: rgb(216, 201, 155);
+    color: yellow;
+    background-color: rgb(39, 62, 71);
+    border: none;
+    border-radius: 4px;
+    width: 90px;
+    margin-left: 20px;
+    margin-top: 2px;
+}
+
+#read-btn:hover{
+    opacity:.8;
+}
+
+@media only screen and (max-width:1200px) {
+    #read-btn{
+        margin-left:0;
+    }
+}
+
 .input-container {
     margin-top: 20px;
     margin-left: 20px;
+    width: 500px;
 }
 
 @media only screen and (max-width:1200px) {
@@ -92,15 +144,15 @@ button:hover {
         padding-top: 50px;
         border-top: .5px yellow dashed;
         margin: 0 auto;
-        width:80%;
-        display:flex;
-        flex-direction:column;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
     }
 }
 
 label {
     color: rgb(216, 201, 155);
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 input {
@@ -112,14 +164,14 @@ input {
 @media only screen and (max-width:1200px) {
     input {
         margin-left: 0;
-        width:50%;
+        width: 50%;
     }
 }
 
 @media only screen and (max-width:768px) {
     input {
         margin-left: 0;
-        width:80%;
+        width: 80%;
     }
 }
 
@@ -170,10 +222,9 @@ input:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* border: 1px red solid; */
     justify-content: center;
     margin: 10px auto;
-    /* width:110%; */
+    -webkit-animation: showMobileButtons .3s linear;
 }
 
 /* ______________ MOBILE MENU ____________________ */
@@ -232,21 +283,15 @@ input:focus {
     display: none;
     position: fixed;
     width: 100vw;
-    height: 100%;
+    height: auto;
     top: 100px;
     /* border:1px red solid; */
     background-color: rgba(39, 62, 71, .9);
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+    -webkit-animation: showMobileButtons .3s linear;
 }
 
 .rating {
     color: yellow;
     margin-bottom: 85px;
-}
-
-.more{
-    display:block;
-    margin:0 auto;
-    margin-left:40px;
-    width:200px;
 }
