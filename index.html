@@ -19,6 +19,7 @@
 
 <body>
     <h1> Sports GIF Generator </h1>
+    <p id="to-save"> To save GIF to favorites double click any GIF</p>
 
     <div class="mobile-btns-all">
         <button id="mobile-btn-menu" class="btn-style">
@@ -29,28 +30,48 @@
         </div>
     </div>
 
+    <div class="favorites-mobile-all">
+
+        <a href="#favorites">
+            <button id="favorites-btn-menu" class="btn-style">
+                <i class="far fa-heart"></i>
+
+                <i id="window-close" class="far fa-window-close"></i>
+            </button>
+        </a>
+
+        <div class="favorites" id="favorites">
+            <h3> Favorites </h3>
+
+        </div>
+
+    </div>
+    </div>
 
     <div class="container-top">
         <div id="btn-container" class="container">
         </div>
 
-        
+
 
         <!-- <div class="wikipedia-input-all"> -->
-            <div class="input-container">
-                <label> search for new GIFs</label>
-                <input id="search-term">
-                <input class="btn-style" id="add-search-term" type="submit" value="Search">
-            </div>
-            <!-- <div class="wikipedia">
+        <div class="input-container">
+            <label> search for new GIFs</label>
+            <input id="search-term">
+            <input class="btn-style" id="add-search-term" type="submit" value="Search">
+        </div>
+        <!-- <div class="wikipedia">
 
             </div>
         </div> -->
 
     </div>
+
     <div class="grid-container">
 
     </div>
+
+
     <script src="./resources/js/index.js"></script>
 </body>
 

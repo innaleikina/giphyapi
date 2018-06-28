@@ -9,7 +9,8 @@ var searchPressed = false;
 
 //display buttons on screen for desktop version
 generateButtons();
-
+//localStorage.clear();
+getFavorites();
 
 // _________________________ FUNCTION PERFORED WHEN SEARCH IS PRESSED_____________________________
 //when search term is added a new button is appended, and buttons rerender on screen
@@ -114,15 +115,18 @@ function hideMobileBtns() {
 //get Gifs on button press
 var url;
 var limit = 10;
+//var offset = Math.floor(Math.random()* 100);
 
 function getGifs() {
+    //offset generates different gifs everytime
+    var offset = Math.floor(Math.random() * 100);
     $(".grid-container").empty();
     //if search hasn't been used, make a call using the button's value
     if (!searchPressed) {
-        url = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=" + limit + "&rating=g&rating=pg");
+        url = $.get("https://api.giphy.com/v1/gifs/search?q=" + this.value + "&api_key=" + key + "&limit=" + limit + "&rating=g&rating=pg&offset=" + offset);
         //if search has been used, make a call using the search term value
     } else if (searchPressed) {
-        url = $.get("https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=" + key + "&limit=" + limit + "&rating=g&rating=pg");
+        url = $.get("https://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=" + key + "&limit=" + limit + "&rating=g&rating=pg&offset=" + offset);
     }
     url.done(function (result) {
         for (var i = 0; i <= result.data.length - 1; i++) {
@@ -190,10 +194,48 @@ function switchGifs() {
     }
 }
 
-//__________________________________________TOGGLE BETWEEN STILL AND MOVING GIFS___________________________
-$(".more").click(function () {
+//__________________________________________  FAVORITES ___________________________
 
-});
+var favoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
+
+function saveToFavorites() {
+    $(".favorites").append($(this).clone());
+    var innerArr = [];
+    innerArr.push($(this).attr("moving"));
+    innerArr.push($(this).attr("still"));
+    favoritesArr.push(innerArr);
+    localStorage.setItem("favoritesArr", JSON.stringify(favoritesArr));
+}
+
+function getFavorites() {
+    // $(".favorites").empty();
+    var getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
+    for (var i = 0; i < getFavoritesArr.length; i++) {
+        var img = $("<img>");
+        img.addClass("one-gif")
+        img.attr("data-state", "still")
+        img.attr("moving", getFavoritesArr[i][0]);
+        img.attr("still", getFavoritesArr[i][1]);
+        img.attr("src", getFavoritesArr[i][1]);
+        $(".favorites").append(img);
+    }
+}
+
+var favoritesClicked = false
+$("#favorites-btn-menu").click(function () {
+    if (!favoritesClicked) {
+        // scrollTo(".favorites");
+        $(".favorites").css("display", "block");
+        $(".fa-window-close").css("display", "block");
+        favoritesClicked = true;
+    } else if (favoritesClicked) {
+        $(".fa-window-close").css("display", "none");
+        $(".favorites").css("display", "none");
+        favoritesClicked = false;
+    }
+})
+
+
 
 
 //__________________________________________CALL FUNCTIONS BUTTONS___________________________
@@ -205,3 +247,4 @@ $(document).on("click", ".btn-mobile", getWikipedia);
 
 $(document).on("click", ".btn-mobile", hideMobileBtns);
 $(document).on("click", ".one-gif", switchGifs);
+$(document).on("dblclick", ".one-gif", saveToFavorites);
