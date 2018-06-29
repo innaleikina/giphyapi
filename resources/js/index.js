@@ -216,8 +216,8 @@ function getFavorites() {
         console.log('Is an array')
 
     }
-    
-    var getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
+    var getFavoritesArr= [];
+     getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
     for (var i = 0; i < getFavoritesArr.length; i++) {
         var img = $("<img>");
         img.addClass("one-gif")
