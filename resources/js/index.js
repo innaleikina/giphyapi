@@ -153,7 +153,7 @@ function getGifs() {
 }
 
 
-//_______________________________________ GET NEWS _______________________
+//_______________________________________ WIKIPEDIA _______________________
 
 function getWikipedia() {
     $(".wikipedia").remove();
@@ -209,6 +209,14 @@ function saveToFavorites() {
 
 function getFavorites() {
     // $(".favorites").empty();
+    if (!Array.isArray(getFavoritesArr)) {
+        console.log('Not an array')
+        getFavoritesArr = [];
+    } else {
+        console.log('Is an array')
+
+    }
+    
     var getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
     for (var i = 0; i < getFavoritesArr.length; i++) {
         var img = $("<img>");
