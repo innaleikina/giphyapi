@@ -203,6 +203,8 @@ function saveToFavorites() {
     var innerArr = [];
     innerArr.push($(this).attr("moving"));
     innerArr.push($(this).attr("still"));
+    console.log(favoritesArr);
+    console.log(innerArr);
     favoritesArr.push(innerArr);
     localStorage.setItem("favoritesArr", JSON.stringify(favoritesArr));
 }
