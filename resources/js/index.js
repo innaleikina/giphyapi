@@ -216,16 +216,18 @@ function getFavorites() {
         console.log('Is an array')
 
     }
-    var getFavoritesArr= [];
-     getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
-    for (var i = 0; i < getFavoritesArr.length; i++) {
-        var img = $("<img>");
-        img.addClass("one-gif")
-        img.attr("data-state", "still")
-        img.attr("moving", getFavoritesArr[i][0]);
-        img.attr("still", getFavoritesArr[i][1]);
-        img.attr("src", getFavoritesArr[i][1]);
-        $(".favorites").append(img);
+    var getFavoritesArr = [];
+    getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
+    if (getFavoritesArr != null && getFavoritesArr.length < 1) {
+        for (var i = 0; i < getFavoritesArr.length; i++) {
+            var img = $("<img>");
+            img.addClass("one-gif")
+            img.attr("data-state", "still")
+            img.attr("moving", getFavoritesArr[i][0]);
+            img.attr("still", getFavoritesArr[i][1]);
+            img.attr("src", getFavoritesArr[i][1]);
+            $(".favorites").append(img);
+        }
     }
 }
 
