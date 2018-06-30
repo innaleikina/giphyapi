@@ -76,7 +76,7 @@ var btnsMobileVisible = false;
 //generates mobile buttons and appends them to mobile container
 //toggles the visibility of mobile buttons
 function generateButtonsMobile() {
-    console.log(btnsMobileVisible);
+    // console.log(btnsMobileVisible);
     $(".display-mobile-btns").empty();
     // $(".display-mobile-btns").css("display", "none");
     if (btnsMobileVisible == false) {
@@ -200,7 +200,7 @@ function switchGifs() {
 favoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
 console.log("new version of favorites");
 if (!Array.isArray(favoritesArr)) {
-    console.log('Not an array')
+    console.log('favorites arr Not an array')
     favoritesArrr = [];
 } else {
     console.log('Is an array')
