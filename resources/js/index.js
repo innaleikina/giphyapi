@@ -226,7 +226,7 @@ function getFavorites() {
         console.log('Is an array')
 
     }
-    var getFavoritesArr = [];
+    // var getFavoritesArr = [];
     getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
    
         for (var i = 0; i < getFavoritesArr.length; i++) {
