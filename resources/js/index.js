@@ -201,7 +201,7 @@ favoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
 console.log("new version of favorites");
 if (!Array.isArray(favoritesArr)) {
     console.log('favorites arr Not an array')
-    favoritesArrr = [];
+    favoritesArr = [];
 } else {
     console.log('Is an array')
 }
