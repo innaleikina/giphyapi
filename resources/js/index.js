@@ -196,7 +196,14 @@ function switchGifs() {
 
 //__________________________________________  FAVORITES ___________________________
 
-var favoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
+// var favoritesArr = [];
+favoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
+if (!Array.isArray(favoritesArr)) {
+    console.log('Not an array')
+    favoritesArrr = [];
+} else {
+    console.log('Is an array')
+}
 
 function saveToFavorites() {
     $(".favorites").append($(this).clone());
