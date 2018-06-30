@@ -198,6 +198,7 @@ function switchGifs() {
 
 // var favoritesArr = [];
 favoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
+console.log("new version of favorites");
 if (!Array.isArray(favoritesArr)) {
     console.log('Not an array')
     favoritesArrr = [];
