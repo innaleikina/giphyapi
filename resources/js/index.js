@@ -228,7 +228,7 @@ function getFavorites() {
     }
     var getFavoritesArr = [];
     getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
-    if (getFavoritesArr != null && getFavoritesArr.length < 1) {
+   
         for (var i = 0; i < getFavoritesArr.length; i++) {
             var img = $("<img>");
             img.addClass("one-gif")
@@ -239,7 +239,7 @@ function getFavorites() {
             $(".favorites").append(img);
         }
     }
-}
+
 
 var favoritesClicked = false
 $("#favorites-btn-menu").click(function () {
