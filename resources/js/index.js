@@ -219,6 +219,8 @@ function saveToFavorites() {
 
 function getFavorites() {
     // $(".favorites").empty();
+    getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
+
     if (!Array.isArray(getFavoritesArr)) {
         console.log('Not an array')
         getFavoritesArr = [];
@@ -227,18 +229,18 @@ function getFavorites() {
 
     }
     // var getFavoritesArr = [];
-    getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
-   
-        for (var i = 0; i < getFavoritesArr.length; i++) {
-            var img = $("<img>");
-            img.addClass("one-gif")
-            img.attr("data-state", "still")
-            img.attr("moving", getFavoritesArr[i][0]);
-            img.attr("still", getFavoritesArr[i][1]);
-            img.attr("src", getFavoritesArr[i][1]);
-            $(".favorites").append(img);
-        }
+
+
+    for (var i = 0; i < getFavoritesArr.length; i++) {
+        var img = $("<img>");
+        img.addClass("one-gif")
+        img.attr("data-state", "still")
+        img.attr("moving", getFavoritesArr[i][0]);
+        img.attr("still", getFavoritesArr[i][1]);
+        img.attr("src", getFavoritesArr[i][1]);
+        $(".favorites").append(img);
     }
+}
 
 
 var favoritesClicked = false
