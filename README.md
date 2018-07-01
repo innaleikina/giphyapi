@@ -1,1 +1,2 @@
 # giphyapi
+The Sports GIF generator makes an API call based on user input to Giphy as well as to Wikipedia. Gifs are displayed using a randomly generated offset number, so the results vary with every button click. Users can also save their favorite GIFs to localStorage, so the favorite GIFs are available even after a refresh or a window close. 
