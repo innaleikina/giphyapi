@@ -206,7 +206,7 @@ input:focus {
 /* _____________________________ GIF GRID ________________ */
 
 .favorites {
-    width: 300px;
+    width: 90%;
     height: auto;
     /* border: 1.6px rgb(216, 151, 60) dashed; */
     margin: 40px auto;

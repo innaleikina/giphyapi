@@ -12,6 +12,9 @@ generateButtons();
 //localStorage.clear();
 getFavorites();
 
+
+
+$("#numOfFaves").text(localStorage.getItem("numOfFaves"));
 // _________________________ FUNCTION PERFORED WHEN SEARCH IS PRESSED_____________________________
 //when search term is added a new button is appended, and buttons rerender on screen
 //gifs populate when search is pressed
@@ -198,21 +201,25 @@ function switchGifs() {
 
 // var favoritesArr = [];
 favoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
-console.log("new version of favorites");
+// console.log("new version of favorites");
 if (!Array.isArray(favoritesArr)) {
-    console.log('favorites arr Not an array')
+    // console.log('favorites arr Not an array')
     favoritesArr = [];
 } else {
-    console.log('Is an array')
+    //console.log('Is an array')
 }
 
 function saveToFavorites() {
+    var favoritesSaved = 1 + favoritesArr.length;
+    localStorage.setItem("numOfFaves", favoritesSaved);
+
+    $("#numOfFaves").text(favoritesSaved);
     $(".favorites").append($(this).clone());
     var innerArr = [];
     innerArr.push($(this).attr("moving"));
     innerArr.push($(this).attr("still"));
-    console.log(favoritesArr);
-    console.log(innerArr);
+   // console.log(favoritesArr);
+    //console.log(innerArr);
     favoritesArr.push(innerArr);
     localStorage.setItem("favoritesArr", JSON.stringify(favoritesArr));
 }
@@ -222,10 +229,10 @@ function getFavorites() {
     getFavoritesArr = JSON.parse(localStorage.getItem("favoritesArr"));
 
     if (!Array.isArray(getFavoritesArr)) {
-        console.log('Not an array')
+       // console.log('Not an array')
         getFavoritesArr = [];
     } else {
-        console.log('Is an array')
+        //console.log('Is an array')
 
     }
     // var getFavoritesArr = [];
@@ -234,12 +241,23 @@ function getFavorites() {
     for (var i = 0; i < getFavoritesArr.length; i++) {
         var img = $("<img>");
         img.addClass("one-gif")
+        img.addClass("remove-gif")
         img.attr("data-state", "still")
         img.attr("moving", getFavoritesArr[i][0]);
         img.attr("still", getFavoritesArr[i][1]);
         img.attr("src", getFavoritesArr[i][1]);
         $(".favorites").append(img);
     }
+}
+
+function removeFavorites(){
+   for(var i =0; i < favoritesArr.length; i++){
+       if($(this).attr("src") == favoritesArr[i][1]){
+           favoritesArr.splice(i,1);
+       }
+   }
+   localStorage.setItem("favoritesArr", favoritesArr);
+   console.log(favoritesArr);
 }
 
 
@@ -266,7 +284,7 @@ $(document).on("click", ".btn", getGifs);
 $(document).on("click", ".btn", getWikipedia);
 $(document).on("click", ".btn-mobile", getGifs);
 $(document).on("click", ".btn-mobile", getWikipedia);
-
+$(document).on("dblclick",".remove-gif", removeFavorites);
 $(document).on("click", ".btn-mobile", hideMobileBtns);
 $(document).on("click", ".one-gif", switchGifs);
 $(document).on("dblclick", ".one-gif", saveToFavorites);
